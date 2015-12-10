@@ -40,7 +40,7 @@ var RoadPal = React.createClass({
       startOnBoot: true,                   // <-- [Android] Auto start background-service in headless mode when device is powered-up.
 
       // HTTP / SQLite config
-      url: 'http://posttestserver.com/post.php?dir=cordova-background-geolocation',
+      /*url: 'http://posttestserver.com/post.php?dir=cordova-background-geolocation',
       batchSync: false,       // <-- [Default: false] Set true to sync locations to server in a single HTTP request.
       autoSync: true,         // <-- [Default: true] Set true to sync each location to server as it arrives.
       maxDaysToPersist: 1,    // <-- Maximum days to persist a location in plugin's SQLite database when HTTP fails
@@ -49,7 +49,7 @@ var RoadPal = React.createClass({
       },
       params: {
         "auth_token": "maybe_your_server_authenticates_via_token_YES?"
-      }
+      }*/
     });
 
     // This handler fires whenever bgGeo receives a location update.
@@ -97,14 +97,13 @@ var RoadPal = React.createClass({
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          RoadPal
         </Text>
         <Text style={styles.instructions}>
           {this.state.message}
         </Text>
         <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
+          Drive better, Drive Saffer
         </Text>
       </View>
     );
