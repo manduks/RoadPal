@@ -1,0 +1,3 @@
+rootProject.name = 'RoadPal'
+
+include ':app'
