@@ -56,7 +56,8 @@ var RoadPal = React.createClass({
     BackgroundGeolocation.on('location', function(location) {
       message = '- [js]location: '+ JSON.stringify(location);
       console.log(message);
-      self.setState({message: message});
+      var distance = calculateDistance(19.2538294, location.coords.latitude, -99.1140977, location.coords.longitude);
+      self.setState({message: message, distance: distance});
     });
 
     // This handler fires whenever bgGeo receives an error
@@ -103,12 +104,33 @@ var RoadPal = React.createClass({
           {this.state.message}
         </Text>
         <Text style={styles.instructions}>
-          Drive better, Drive Saffer
+          Drive better, Drive Saffer{'\n'}
+          Distance from Home: {this.state.distance} Km{'\n'}
         </Text>
       </View>
     );
   }
 });
+
+var calculateDistance = function (lat1, lat2, lon1, lon2){
+  var R = 6371; // Radio del planeta tierra en km
+    var phi1 = (lat1) * Math.PI / 180;
+    var phi2 = (lat2) * Math.PI / 180;
+    var deltaphi = (lat2-lat1) * Math.PI / 180;
+    var deltalambda = (lon2-lon1) * Math.PI / 180;
+
+    var a = Math.sin(deltaphi/2) * Math.sin(deltaphi/2) +
+            Math.cos(phi1) * Math.cos(phi2) *
+            Math.sin(deltalambda/2) * Math.sin(deltalambda/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    var d = R * c
+    return d;
+}
+
+var toRadians = function (number) {
+  return number * Math.PI / 180;
+}
 
 var styles = StyleSheet.create({
   container: {
