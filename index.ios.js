@@ -23,10 +23,10 @@ var RoadPal = React.createClass({
       stationaryRadius: 50,
       distanceFilter: 50,
       disableElasticity: false, // <-- [iOS] Default is 'false'.  Set true to disable speed-based distanceFilter elasticity
-      locationUpdateInterval: 5000,
+      locationUpdateInterval: 1000,
       minimumActivityRecognitionConfidence: 80,   // 0-100%.  Minimum activity-confidence for a state-change
-      fastestLocationUpdateInterval: 5000,
-      activityRecognitionInterval: 10000,
+      fastestLocationUpdateInterval: 1000,
+      activityRecognitionInterval: 2000,
       stopDetectionDelay: 1,  // <--  minutes to delay after motion stops before engaging stop-detection system
       stopTimeout: 2, // 2 minutes
       activityType: 'AutomotiveNavigation',
