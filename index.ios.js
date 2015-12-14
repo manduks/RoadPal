@@ -10,6 +10,7 @@ var {
   AppRegistry,
   StyleSheet,
   Text,
+  SwitchIOS,
   View,
 } = React;
 
@@ -57,7 +58,7 @@ var RoadPal = React.createClass({
       message = '- [js]location: '+ JSON.stringify(location);
       console.log(message);
       var distance = calculateDistance(19.2538294, location.coords.latitude, -99.1140977, location.coords.longitude);
-      self.setState({message: message, distance: distance});
+      self.setState({message: message, distance: distance, currentSpeed: location.coords.speed});
     });
 
     // This handler fires whenever bgGeo receives an error
@@ -96,17 +97,33 @@ var RoadPal = React.createClass({
   },
   render: function() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          RoadPal
-        </Text>
-        <Text style={styles.instructions}>
-          {this.state.message}
-        </Text>
-        <Text style={styles.instructions}>
-          Drive better, Drive Saffer{'\n'}
-          Distance from Home: {this.state.distance} Km{'\n'}
-        </Text>
+      <View style={styles.mainContainer}>
+        <View style={styles.toolbar}>
+          <Text style={styles.toolbarTitle}>ROADPAL</Text>
+        </View>
+        <View style={styles.formFieldContainer}>
+          <Text>Alerta de camaras</Text>
+          <SwitchIOS/>
+        </View>
+        <View style={styles.formFieldContainer}>
+          <Text>Alerta de limites de velocidad</Text>
+          <SwitchIOS/>
+        </View>
+        <View style={styles.speedContainer}>
+          <Text style={styles.speedLabel}>{this.state.currentSpeed} km/h</Text>
+        </View>
+        <View style={styles.content}>
+          <Text style={styles.welcome}>
+            RoadPal
+          </Text>
+          <Text style={styles.instructions}>
+            {this.state.message}
+          </Text>
+          <Text style={styles.instructions}>
+            Drive better, Drive Saffer{'\n'}
+            Distance from Home: {this.state.distance} Km{'\n'}
+          </Text>
+        </View>
       </View>
     );
   }
@@ -133,7 +150,22 @@ var toRadians = function (number) {
 }
 
 var styles = StyleSheet.create({
-  container: {
+  mainContainer: {
+    flex: 1,
+  },
+  toolbar: {
+    backgroundColor:'#81c04d',
+    paddingTop:30,
+    paddingBottom:10,
+    flexDirection:'row'
+  },
+  toolbarTitle:{
+    color:'#fff',
+    textAlign:'center',
+    fontWeight:'bold',
+    flex:1
+  },
+  content: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -149,6 +181,25 @@ var styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+
+  speedContainer:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 400
+  },
+  speedLabel: {
+    fontSize: 60,
+    color:'#81c04d',
+    textAlign:'center',
+    fontWeight:'bold',
+  },
+  //form styles
+  formFieldContainer: {
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    margin: 10
+    //alignItems: 'left'
+  }
 });
 
 AppRegistry.registerComponent('RoadPal', () => RoadPal);
